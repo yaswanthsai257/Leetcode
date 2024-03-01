@@ -1,29 +1,12 @@
 class Solution {
-    public int trap(int[] a) {
-        int i = 0;
-        int j = a.length - 1;
-        int l = 0;
-        int r = 0;
-        int water = 0;
-        
-        while (i < j) {
-            if (a[i] <= a[j]) {
-                if (a[i] >= l) {
-                    l = a[i];
-                } else {
-                    water += l - a[i];
-                }
-                i++;
-            } else {
-                if (a[j] >= r) {
-                    r = a[j];
-                } else {
-                    water += r - a[j];
-                }
-                j--;
-            }
+    public int trap(int[] h) {
+        int l = 0, r = h.length - 1, lmax = Integer.MIN_VALUE, rmax = Integer.MIN_VALUE;
+        int res = 0;
+        while (l < r) {
+        lmax = Math.max(lmax, h[l]);
+        rmax = Math.max(rmax, h[r]);
+        res += (lmax < rmax) ? lmax - h[l++] : rmax - h[r--];
         }
-        
-        return water;
+        return res;
     }
 }
